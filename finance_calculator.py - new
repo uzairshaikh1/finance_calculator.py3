@@ -1,0 +1,43 @@
+import math
+
+print("Menu - Investment or Bond")
+
+# Ask user to select what he would like the finance calculator for
+while True:
+    user_selection = input("Enter 'investment' or 'bond' from the menu above to proceed: ").strip().lower()
+
+    if user_selection == 'investment' or user_selection == 'bond':
+        print("Continue")
+        break
+    else:
+        print("Invalid selection. Please enter 'Investment' or 'Bond'.")
+
+# If user selects investment - this is what will be asked of the user
+if user_selection == 'investment':
+    money_deposited = float(input("How much money are you depositing:"))
+    interest_rate = float(input("Please enter interest rate as a percentage:"))
+    years_investment = float(input("How many years do you plan on investing:"))
+
+    interest_type = input("What type of interest would you like? Enter 'simple' for simple interest or 'compound' for compound interest:").strip().lower()
+    interest = (interest_rate / 100) / 12
+
+    # Simple and compound interest calculations for investment
+    if interest_type == "simple":
+        simple_interest_calculation = money_deposited * (1 + interest * years_investment)
+        print("Your total investment value is = £" + str(simple_interest_calculation))
+    elif interest_type == "compound":
+        compound_interest_calculation = money_deposited * math.pow((1 + interest), years_investment)
+        print("Your total investment value is = £" + str(compound_interest_calculation))
+
+# Ask user for info for the bond option
+else:
+    if user_selection == 'bond':
+        house_value = float(input("What is the value of the house:"))
+        interest_rate = float(input("Please enter interest rate as a percentage:"))
+        repayment_duration = float(input("In how many months do you plan to repay the bond:"))
+
+        interest = (interest_rate / 100) / 12
+
+        # Calculate monthly bond repayment
+        monthly_amt = (interest * house_value) / (1 - (1 + interest) ** -repayment_duration)
+        print("Your monthly bond repayment would be: £" + str(round(monthly_amt, 2)))
